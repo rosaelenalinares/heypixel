@@ -1,1 +1,1 @@
-web: gunicorn heypixel.wsgi:application
+web: gunicorn heypixel.wsgi
