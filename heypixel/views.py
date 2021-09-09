@@ -2,7 +2,7 @@ from re import U
 from django.shortcuts import get_object_or_404, render
 from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
-from .serializers import PostSerializer, CommentSerializer, LikeSerializer, UserProfileSerializer, RegisterSerializer, MyTokenObtainPairSerializer, ChangePasswordSerializer, UpdateUserSerializer
+from .serializers import PostSerializer, CommentSerializer, LikeSerializer, UserProfileSerializer, RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer
 from .models import Post, Comment, Like, UserProfile
 from django.contrib.auth.models import User
 from rest_framework.response import Response
@@ -12,15 +12,13 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
-# from django.db.models import Count
+from django.db.models import Count
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import AllowAny
 from rest_framework import generics
+from rest_framework_simplejwt.tokens import RefreshToken, OutstandingToken, BlacklistedToken
 
-class MyObtainTokenPairView(TokenObtainPairView):
-    permission_classes = (AllowAny,)
-    serializer_class = MyTokenObtainPairSerializer
 
 
 class RegisterView(APIView):
@@ -42,6 +40,16 @@ class UpdateProfileView(generics.UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = UpdateUserSerializer
+
+
+class LogoutView(APIView):
+    permission_classes = (IsAuthenticated,)
+    def post(self, request):
+        tokens = OutstandingToken.objects.filter(user_id=request.user.id)
+        for token in tokens:
+            t, _ = BlacklistedToken.objects.get_or_create(token=token)
+
+        return Response(status=status.HTTP_205_RESET_CONTENT)
 
 
 class post_list(APIView):
