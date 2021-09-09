@@ -2,8 +2,8 @@ from re import U
 from django.shortcuts import get_object_or_404, render
 from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
-from .serializers import PostSerializer, CommentSerializer, LikeSerializer, UserProfileSerializer, RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer
-from .models import Post, Comment, Like, UserProfile
+from .serializers import PostSerializer, CommentSerializer, LikeSerializer, ProfileSerializer, RegisterSerializer, ChangePasswordSerializer, UpdateUserSerializer
+from .models import Post, Comment, Like
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 import cloudinary.uploader
@@ -49,7 +49,28 @@ class LogoutView(APIView):
         for token in tokens:
             t, _ = BlacklistedToken.objects.get_or_create(token=token)
 
-        return Response(status=status.HTTP_205_RESET_CONTENT)
+        return Response({'message': 'Logout was successfully!'}, status=status.HTTP_205_RESET_CONTENT)
+
+class ProfileView(APIView):
+    permission_classes = (AllowAny,)
+    def get(self, request,):
+        user = User.objects.all()
+        serializer = ProfileSerializer(user, many=True)
+        return Response(serializer.data)
+        
+
+class ProfileViewDetail(APIView):
+    permission_classes = (AllowAny,)
+    def get_object(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        user = self.get_object(pk)
+        serializer = ProfileSerializer(user)
+        return Response(serializer.data)
 
 
 class post_list(APIView):
@@ -60,6 +81,7 @@ class post_list(APIView):
             posts = posts.filter(body__icontains=body)
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
+
 
     def post(self, request):
         post = PostSerializer(data=request.data)

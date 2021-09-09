@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post, Comment, Like, UserProfile
+from .models import Post, Comment, Like
 from rest_framework.fields import SerializerMethodField
 from rest_framework import serializers
 from django.contrib.auth.models import User
@@ -152,14 +152,16 @@ class LikeSerializer(serializers.ModelSerializer):
             'author',
         )
 
-class UserProfileSerializer(serializers.ModelSerializer):
+
+class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UserProfile
+        model = User
         fields = (
-            'user', 
+            'id',
+            'username', 
             'first_name', 
             'last_name', 
-            'bio', 
-            'birth_date', 
-            'location',
+            'email', 
+            'first_name', 
+            'last_name'
         )

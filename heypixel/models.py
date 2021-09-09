@@ -25,14 +25,5 @@ class Comment(models.Model):
 class Like(models.Model):
     like_post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="likes")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=10, blank=True, null=True)
-    last_name = models.CharField(max_length=10, blank=True, null=True)
-    bio = models.TextField(max_length=150, blank=True, null=True)
-    birth_date = models.DateField(null=True, blank=True)
-    location = models.CharField(max_length=50, blank=True, null=True)
 
 
