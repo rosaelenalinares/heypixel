@@ -108,12 +108,12 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(many=False)
-    comments = serializers.SlugRelatedField(
-        many=True,
-        read_only=True,
-        slug_field='body_comment'
-     )
+    # author = serializers.StringRelatedField(many=False)
+    # comments = serializers.SlugRelatedField(
+    #     many=True,
+    #     read_only=True,
+    #     slug_field='body_comment'
+    #  )
     class Meta:
         model = Post
         fields = (
@@ -127,12 +127,12 @@ class PostSerializer(serializers.ModelSerializer):
         )
 
 class CommentSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(many=False)
-    post = serializers.SlugRelatedField(
-        many=False,
-        read_only=True,
-        slug_field='body'
-     )
+    # author = serializers.StringRelatedField(many=False)
+    # post = serializers.SlugRelatedField(
+    #     many=False,
+    #     read_only=True,
+    #     slug_field='body'
+    #  )
     class Meta:
         model = Comment
         fields = (
