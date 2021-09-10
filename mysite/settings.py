@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'heypixel',
     'cloudinary_storage',
     'cloudinary',
+
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [

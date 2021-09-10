@@ -27,7 +27,7 @@ class RegisterView(APIView):
         register = RegisterSerializer(data=request.data)
         if register.is_valid():
             register.save()
-            return Response(register.data, status=status.HTTP_201_CREATED)
+            return Response({'message': 'Register was successfully!'}, status=status.HTTP_201_CREATED)
         return Response(register.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ChangePasswordView(generics.UpdateAPIView):
@@ -89,13 +89,13 @@ class post_list(APIView):
             cloudinary.uploader.upload(request.data.get('image'))
         if post.is_valid():
             post.save()
-            return Response(post.data, status=status.HTTP_201_CREATED)
+            return Response({'message': 'Post was created successfully!'}, status=status.HTTP_201_CREATED)
         return Response(post.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request):
         post = Post.objects.all()
         post.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Post was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 
 
@@ -119,7 +119,7 @@ class post_detail(APIView):
         serializer = PostSerializer(post, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response({'message': 'Post was updated successfully!'})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
@@ -138,13 +138,13 @@ class comment_list(APIView):
         comment = CommentSerializer(data=request.data)
         if comment.is_valid():
             comment.save()
-            return Response(comment.data, status=status.HTTP_201_CREATED)
+            return Response({'message': 'Comment was created successfully!'}, status=status.HTTP_201_CREATED)
         return Response(comment.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request):
         comment = Comment.objects.all()
         comment.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Comment was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 
 class comment_detail(APIView):
@@ -164,7 +164,7 @@ class comment_detail(APIView):
         serializer = CommentSerializer(comment, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response({'message': 'Comment was updated successfully!'})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
@@ -183,6 +183,12 @@ class comment_list_author(APIView):
 
 
 class like_post(APIView):
+    def get_object(self, pk):
+        try:
+            return Like.objects.get(pk=pk)
+        except Like.DoesNotExist:
+            raise Http404
+
     def get(self, request):
         likes = Like.objects.all()
         serializer = LikeSerializer(likes, many=True)
@@ -195,7 +201,7 @@ class like_post(APIView):
             return Response(like.data, status=status.HTTP_201_CREATED)
         return Response(like.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request):
-        like = Like.objects.all()
+    def delete(self, request, pk):
+        like = self.get_object(pk)
         like.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

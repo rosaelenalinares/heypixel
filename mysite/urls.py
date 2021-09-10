@@ -17,10 +17,20 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
+from rest_framework.schemas import get_schema_view
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('heypixel.urls')),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('openapi/', get_schema_view(
+        title="heypixel",
+        description="API for developers who would like to use my service"
+    ), name='openapi-schema'),
+    path('docs/', TemplateView.as_view(
+        template_name='documentation.html',
+        extra_context={'schema_url':'openapi-schema'}
+    ), name='swagger-ui'),
 ]
