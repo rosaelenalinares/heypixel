@@ -16,14 +16,14 @@ class Post (models.Model):
 class Comment(models.Model):
     body_comment = models.TextField(max_length=1000, blank=True, null=True)
     created_on = models.DateTimeField(default=timezone.now)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['created_on']
 
 class Like(models.Model):
-    like_post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="likes")
+    like_post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="likes", blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
 

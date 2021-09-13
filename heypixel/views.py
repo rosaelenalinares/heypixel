@@ -79,9 +79,10 @@ class post_list(APIView):
         body = request.query_params.get('body', None)
         if body is not None:
             posts = posts.filter(body__icontains=body)
+        else:
+            return Response({'message': 'Search not found'}, status=status.HTTP_202_ACCEPTED)
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
-
 
     def post(self, request):
         post = PostSerializer(data=request.data)
