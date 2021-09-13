@@ -284,16 +284,16 @@
 ```json
 [
   {
-    "id": integer,
+    "id": "integer",
     "body": "string",
     "created_on": "string",
-    "author": integer,
+    "author": "integer",
     "image": "string",
     "comments": [
       "string or empty list is there is not comments for this post"
     ],
     "likes": [
-      integer or empty list is there is not comments for this post
+      "integer or empty list is there is not comments for this post"
     ]
 }
 ]
@@ -322,7 +322,7 @@
     "id": "integer",
     "body": "string",
     "created_on": "string",
-    "author": integer,
+    "author": "integer",
     "image": "string",
     "comments": [
       "string or empty list is there is not comments for this post"
