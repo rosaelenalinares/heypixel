@@ -142,7 +142,7 @@
 
 ### **Get detail of a profile**
 
-#### URL: `http://heypixel.herokuapp.com/api/profiles/{id}`
+#### URL: `http://heypixel.herokuapp.com/api/profile/{id}`
 
 #### Method: `GET`
 

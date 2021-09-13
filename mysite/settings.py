@@ -174,9 +174,9 @@ REST_FRAMEWORK = {
 
 #cloudinary
 cloudinary.config( 
-  cloud_name = "your cloud name", 
-  api_key = "your api key", 
-  api_secret = "your secret api",
+  cloud_name = "rosalinares", 
+  api_key = "835136624876263", 
+  api_secret = "0SK7QUsJML9LcYvLFWPVFKlx8C0",
 )
 
 
@@ -193,3 +193,4 @@ SIMPLE_JWT = {
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
+AUTH_USER_MODEL = "heypixel.User" 
