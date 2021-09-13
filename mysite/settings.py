@@ -176,7 +176,7 @@ REST_FRAMEWORK = {
 cloudinary.config( 
   cloud_name = "your cloud_name", 
   api_key = "your api key", 
-  api_secret = "your api secret",
+  api_secret = "your api secrec",
 )
 
 

@@ -16,7 +16,7 @@
 
 ```json
 {
-  "message": "Register was successfully!",
+  "message": "Register was successfully!"
 }
 ```
 
@@ -24,7 +24,7 @@
 
 ```json
 {
-  "error": "Error message 404";
+  "error": "Error message 404"
 }
 ```
 
@@ -49,7 +49,7 @@
 
 ```json
 {
-  "error": "Error message 404";
+  "error": "Error message 404"
 }
 ```
 
@@ -114,14 +114,14 @@
 ```json
 [
     {
-        "id": integer,
+        "id": "integer",
         "username": "string",
         "first_name": "string",
         "last_name": "string",
         "email": "string"
     },
     {
-        "id": integer,
+        "id": "integer",
         "username": "string",
         "first_name": "string",
         "last_name": "string",
@@ -151,7 +151,7 @@
 ```json
 [
     {
-        "id": integer,
+        "id": "integer",
         "username": "string",
         "first_name": "string",
         "last_name": "string",
@@ -319,7 +319,7 @@
 ```json
 [
   {
-    "id": integer,
+    "id": "integer",
     "body": "string",
     "created_on": "string",
     "author": integer,
@@ -328,7 +328,7 @@
       "string or empty list is there is not comments for this post"
     ],
     "likes": [
-      integer or empty list is there is not comments for this post
+      "integer or empty list is there is not comments for this post"
     ]
   }
 ]
@@ -358,11 +358,11 @@
 ```json
 [
   {
-    "id": integer,
+    "id": "integer",
     "body_comment": "string",
     "created_on": "string",
-    "post": integer,
-    "author": 1integer
+    "post": "integer",
+    "author": "integer"
   },
 ]
 ```
@@ -464,9 +464,9 @@
 
 ```json
 {
-    "id": integer,
-    "like_post": integer,
-    "author": integer
+    "id": "integer",
+    "like_post": "integer",
+    "author": "integer"
 }
 
 ```
@@ -518,7 +518,7 @@
 ```json
 [
     {
-        "id": integer,
+        "id": "integer",
         "body": "string",
         "created_on": "string",
         "author": "string",
@@ -527,7 +527,7 @@
             "string",
         ],
         "likes": [
-            integer,
+            "integer",
         ]
     }
 ]
