@@ -7,7 +7,7 @@ from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class User(AbstractUser):
-	image = CloudinaryField('imagen', default=True)
+	image = CloudinaryField('imagen', default=True, blank=True)
 	bio = models.CharField(max_length=255, blank=True)
 
 	def __str__(self):
