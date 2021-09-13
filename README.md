@@ -10,7 +10,7 @@
 
 #### Required fields: `username`,  `password`,  `password2`,  `email`, `first_name`, `last_name`
 
-#### Notes: email has to be a valid email and password has to be min 8 and max 10 alphanumeric characters
+#### Notes: valid email is required.
 
 ##### Status code: `201 Created`
 
