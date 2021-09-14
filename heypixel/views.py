@@ -135,6 +135,7 @@ class post_detail(APIView):
         post.delete()
         return Response({'message': 'Post was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     
+    
     def total_likes_received(self, pk):
         post = self.get_object(pk)
         total_likes_received = Like.objects.filter(post__author=post.author).count()

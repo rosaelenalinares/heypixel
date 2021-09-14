@@ -174,9 +174,9 @@ REST_FRAMEWORK = {
 
 #cloudinary
 cloudinary.config( 
-  cloud_name = "rosalinares", 
-  api_key = "835136624876263", 
-  api_secret = "0SK7QUsJML9LcYvLFWPVFKlx8C0",
+  cloud_name = "your cloud name", 
+  api_key = "your api key", 
+  api_secret = "your secret api",
 )
 
 
